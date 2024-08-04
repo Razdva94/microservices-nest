@@ -1,0 +1,27 @@
+services:
+  db:
+    container_name: pg_db
+    image: postgres:16
+    ports:
+      - '5438:5432'
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=tasks
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+  app:
+    build:
+      context: .
+      dockerfile: task_dockerfile
+    environment:
+      DATABASE_URL: 'postgresql://postgres:postgres@pg_db:5432/tasks?schema=public'
+    ports:
+      - '5000:5000'
+    depends_on:
+      - db
+    command: ['sh', '-c', 'npx prisma migrate deploy && npm run start:dev']
+
+volumes:
+  postgres_data:
