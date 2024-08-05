@@ -17,10 +17,10 @@
     "strictBindCallApply": false,
     "noFallthroughCasesInSwitch": false,
     "strict": true,
-    "forceConsistentCasingInFileNames": true
-    // "paths": {
-    //   "@task-project/package": ["node_modules/task-project-razdva1994/dist/*"]
-    // }
+    "forceConsistentCasingInFileNames": true,
+    "paths": {
+      "@task-project/common/*": ["../common/dist/*"] // без него не работало
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]

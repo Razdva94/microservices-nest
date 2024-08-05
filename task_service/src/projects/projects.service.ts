@@ -2,10 +2,10 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { RequestWithUserId } from 'src/types/types';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
-import { PrismaService } from 'src/prisma.service';
-console.log('Проверка импорта ConsoleService');
+import { PrismaService } from '@task-project/common';
 import { ConsoleService } from '@task-project/common';
-console.log('Импорт выполнен успешно');
+import { Projects } from '@prisma/client';
+
 interface Itasks {
   id: number;
   columnId: number;
@@ -31,7 +31,6 @@ export class ProjectsService {
   async getProjects(req: RequestWithUserId) {
     const consoleService = new ConsoleService();
     consoleService.showConsole();
-    console.log('sdfasdf');
     const userId: number = req?.user?.id;
     if (userId === undefined) {
       throw new BadRequestException('Пользователь не найден');
@@ -193,7 +192,7 @@ export class ProjectsService {
     ProjectDto: UpdateProjectDto,
     id: number,
     req: RequestWithUserId,
-  ) {
+  ): Promise<Projects> {
     const userId: number = req?.user?.id;
     if (userId === undefined) {
       throw new BadRequestException('Пользователь не найден');

@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskFieldsService = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("../prisma.service");
+const common_2 = require("@task-project/common");
 const client_1 = require("@prisma/client");
 const enums_1 = require("../enums/enums");
 var TaskFieldName;
@@ -163,6 +163,6 @@ let TaskFieldsService = class TaskFieldsService {
 exports.TaskFieldsService = TaskFieldsService;
 exports.TaskFieldsService = TaskFieldsService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [common_2.PrismaService])
 ], TaskFieldsService);
 //# sourceMappingURL=task-fields.service.js.map

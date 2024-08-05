@@ -18,7 +18,7 @@ const tasks_service_1 = require("./tasks.service");
 const create_task_dto_1 = require("./dto/create-task.dto");
 const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 const update_task_dto_1 = require("./dto/update-task.dto");
-const validation_pipe_1 = require("../pipes/validation.pipe");
+const common_2 = require("@task-project/common");
 const swagger_1 = require("@nestjs/swagger");
 let TasksController = class TasksController {
     constructor(tasksService) {
@@ -110,7 +110,7 @@ __decorate([
     (0, swagger_1.ApiQuery)({ name: 'projectId', description: 'Идентификатор проекта' }),
     (0, common_1.Post)('/create'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.UsePipes)(validation_pipe_1.ValidationPipe),
+    (0, common_1.UsePipes)(common_2.ValidationPipe),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Next)()),
     __param(2, (0, common_1.Res)()),
@@ -129,7 +129,7 @@ __decorate([
     (0, swagger_1.ApiQuery)({ name: 'projectId', description: 'Идентификатор проекта' }),
     (0, common_1.Patch)('/update/:id'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.UsePipes)(validation_pipe_1.ValidationPipe),
+    (0, common_1.UsePipes)(common_2.ValidationPipe),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __param(2, (0, common_1.Req)()),
@@ -151,7 +151,7 @@ __decorate([
     (0, swagger_1.ApiQuery)({ name: 'projectId', description: 'Идентификатор проекта' }),
     (0, common_1.Patch)('/move-within/:id'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.UsePipes)(validation_pipe_1.ValidationPipe),
+    (0, common_1.UsePipes)(common_2.ValidationPipe),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Req)()),
     __param(2, (0, common_1.Res)()),
@@ -173,7 +173,7 @@ __decorate([
     (0, swagger_1.ApiQuery)({ name: 'projectId', description: 'Идентификатор проекта' }),
     (0, common_1.Patch)('/move-outer/:id'),
     (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.UsePipes)(validation_pipe_1.ValidationPipe),
+    (0, common_1.UsePipes)(common_2.ValidationPipe),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Req)()),
     __param(2, (0, common_1.Res)()),

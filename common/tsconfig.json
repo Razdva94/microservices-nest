@@ -20,10 +20,10 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true
     // "paths": {
-    //   "@task-project-razdva1994/*": ["./dist/*"]
+    //   "@task-project/common/*": ["../common/src/*"]
     // }
   },
-  "include": ["src/**/*.ts"],
+  // "include": ["/**/*.ts"],
   "exclude": ["node_modules", "dist"]
 }
 

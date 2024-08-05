@@ -10,9 +10,9 @@ import {
   Res,
   UseGuards,
   UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { TaskFieldsService } from './task-fields.service';
+import { ValidationPipe } from '@task-project/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RequestWithUserId, CustomError } from 'src/types/types';
 import { NextFunction, Response } from 'express';

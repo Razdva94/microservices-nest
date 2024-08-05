@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import * as cookieParser from 'cookie-parser';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { AllExceptionsFilter } from './exceptions/all-exceptions.filter';
+import { AllExceptionsFilter } from '@task-project/common';
 
 async function start() {
   const PORT = process.env.PORT || 5000;

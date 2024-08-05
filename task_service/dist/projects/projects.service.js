@@ -11,10 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProjectsService = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("../prisma.service");
-console.log('Проверка импорта ConsoleService');
 const common_2 = require("@task-project/common");
-console.log('Импорт выполнен успешно');
+const common_3 = require("@task-project/common");
 var TaskFieldValueType;
 (function (TaskFieldValueType) {
     TaskFieldValueType["ENUM"] = "TaskFieldValueEnum";
@@ -26,9 +24,8 @@ let ProjectsService = class ProjectsService {
         this.prisma = prisma;
     }
     async getProjects(req) {
-        const consoleService = new common_2.ConsoleService();
+        const consoleService = new common_3.ConsoleService();
         consoleService.showConsole();
-        console.log('sdfasdf');
         const userId = req?.user?.id;
         if (userId === undefined) {
             throw new common_1.BadRequestException('Пользователь не найден');
@@ -163,6 +160,6 @@ let ProjectsService = class ProjectsService {
 exports.ProjectsService = ProjectsService;
 exports.ProjectsService = ProjectsService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [common_2.PrismaService])
 ], ProjectsService);
 //# sourceMappingURL=projects.service.js.map

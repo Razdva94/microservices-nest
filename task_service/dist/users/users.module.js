@@ -10,7 +10,7 @@ exports.UsersModule = void 0;
 const common_1 = require("@nestjs/common");
 const users_controller_1 = require("./users.controller");
 const users_service_1 = require("./users.service");
-const prisma_service_1 = require("../prisma.service");
+const common_2 = require("@task-project/common");
 const auth_module_1 = require("../auth/auth.module");
 let UsersModule = class UsersModule {
 };
@@ -19,7 +19,7 @@ exports.UsersModule = UsersModule = __decorate([
     (0, common_1.Module)({
         imports: [(0, common_1.forwardRef)(() => auth_module_1.AuthModule)],
         controllers: [users_controller_1.UsersController],
-        providers: [users_service_1.UsersService, prisma_service_1.PrismaService],
+        providers: [users_service_1.UsersService, common_2.PrismaService],
         exports: [users_service_1.UsersService],
     })
 ], UsersModule);

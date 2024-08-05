@@ -10,8 +10,8 @@ import {
   Res,
   UseGuards,
   UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
+import { ValidationPipe } from '@task-project/common';
 import { ColumnsService } from './columns.service';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateColumnDto } from './dto/create-column.dto';

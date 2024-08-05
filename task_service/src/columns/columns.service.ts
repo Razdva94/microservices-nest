@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateColumnDto } from './dto/create-column.dto';
 import { RequestWithUserId } from 'src/types/types';
 import { UpdateColumnDto } from './dto/update-column.dto';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '@task-project/common';
 import { Action } from 'src/enums/enums';
 
 @Injectable()

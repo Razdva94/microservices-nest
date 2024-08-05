@@ -8,7 +8,7 @@ import {
 import { Post, Body, UsePipes } from '@nestjs/common';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { AuthService } from './auth.service';
-import { ValidationPipe } from 'src/pipes/validation.pipe';
+import { ValidationPipe } from '@task-project/common';
 import { LoginUserDto } from 'src/auth/dto/login-user.dto';
 import { NextFunction, Response, Request } from 'express';
 import { CustomError } from 'src/types/types';

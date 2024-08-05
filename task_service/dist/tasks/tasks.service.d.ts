@@ -1,6 +1,6 @@
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '@task-project/common';
 import { RequestWithUserId } from 'src/types/types';
 declare class TasksService {
     private prisma;

@@ -16,7 +16,7 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { UpdateTaskDto } from 'src/tasks/dto/update-task.dto';
 import { NextFunction, Response } from 'express';
-import { ValidationPipe } from '../pipes/validation.pipe';
+import { ValidationPipe } from '@task-project/common';
 import { CustomError, RequestWithUserId } from 'src/types/types';
 import {
   ApiBearerAuth,

@@ -8,13 +8,13 @@ import {
   UseGuards,
   Next,
   Res,
-  ValidationPipe,
   UsePipes,
   Patch,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { ValidationPipe } from '@task-project/common';
 import {
   ApiOperation,
   ApiTags,

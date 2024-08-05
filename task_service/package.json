@@ -5,12 +5,6 @@
   "main": "main.js",
   "author": "Antonov Danila",
   "license": "UNLICENSED",
-  "imports": {
-    "#common-service/*": {
-      "development": "@task_service/common/src/*",
-      "production": "@task_service/common/dist/*"
-    }
-  },
   "scripts": {
     "create-view": "node dist/prisma/createView.js",
     "build": "nest build",
@@ -56,7 +50,7 @@
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
     "swagger-ui-express": "^5.0.0",
-    "task-project-razdva1994": "^0.0.21"
+    "task-project-razdva1994": "^0.0.23"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",

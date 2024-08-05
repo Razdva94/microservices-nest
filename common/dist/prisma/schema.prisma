@@ -1,0 +1,128 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id       Int    @id @unique @default(autoincrement())
+  name     String
+  email    String @unique
+  password String
+
+  refreshToken RefreshTokens?
+  Projects     Projects[]
+}
+
+model RefreshTokens {
+  id     Int      @id @unique @default(autoincrement())
+  userId Int      @unique
+  token  String
+  exp    DateTime
+
+  user Users @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Projects {
+  id          Int     @id @unique @default(autoincrement())
+  name        String
+  userId      Int
+  description String?
+
+  user      Users     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Columns   Columns[]
+  Tasks     Tasks[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@unique([userId, name])
+}
+
+model Columns {
+  id        Int    @id @unique @default(autoincrement())
+  name      String
+  position  Int    @default(0)
+  projectId Int
+
+  tasks   Tasks[]
+  project Projects @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  @@unique([projectId, name])
+}
+
+model Tasks {
+  id          Int      @id @unique @default(autoincrement())
+  columnId    Int
+  projectId   Int
+  name        String
+  description String?
+  position    Int
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  column               Columns                @relation(fields: [columnId], references: [id], onDelete: Cascade)
+  project              Projects               @relation(fields: [projectId], references: [id])
+  TaskFieldValueNumber TaskFieldValueNumber[]
+  TaskFieldValueString TaskFieldValueString[]
+  TaskFieldValueEnum   TaskFieldValueEnum[]
+
+  @@unique([projectId, name])
+}
+
+model TaskField {
+  id           Int                    @id @default(autoincrement())
+  name         String                 @unique
+  type         FieldType
+  stringValues TaskFieldValueString[]
+  numberValues TaskFieldValueNumber[]
+  enumValues   TaskFieldValueEnum[]
+}
+
+model TaskFieldValueString {
+  taskId      Int
+  taskFieldId Int
+  value       String
+
+  task      Tasks     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  taskField TaskField @relation(fields: [taskFieldId], references: [id], onDelete: Cascade)
+
+  @@id([taskId, taskFieldId])
+}
+
+model TaskFieldValueNumber {
+  taskId      Int
+  taskFieldId Int
+  value       Float
+
+  task      Tasks     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  taskField TaskField @relation(fields: [taskFieldId], references: [id], onDelete: Cascade)
+
+  @@id([taskId, taskFieldId])
+}
+
+model TaskFieldValueEnum {
+  taskId      Int
+  taskFieldId Int
+  value       TaskFieldEnumOptions
+
+  task      Tasks     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  taskField TaskField @relation(fields: [taskFieldId], references: [id], onDelete: Cascade)
+
+  @@id([taskId, taskFieldId])
+}
+
+enum FieldType {
+  STRING
+  NUMBER
+  ENUM
+}
+
+enum TaskFieldEnumOptions {
+  HIGH
+  MEDIUM
+  LOW
+}

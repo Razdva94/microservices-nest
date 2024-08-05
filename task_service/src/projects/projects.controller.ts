@@ -11,9 +11,9 @@ import {
   Res,
   UseGuards,
   UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
 import { NextFunction } from 'express';
+import { ValidationPipe } from '@task-project/common';
 import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { RequestWithUserId } from 'src/types/types';
 import { CreateProjectDto } from './dto/create-project.dto';

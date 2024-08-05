@@ -10,7 +10,7 @@ exports.ColumnsModule = void 0;
 const common_1 = require("@nestjs/common");
 const columns_controller_1 = require("./columns.controller");
 const columns_service_1 = require("./columns.service");
-const prisma_service_1 = require("../prisma.service");
+const common_2 = require("@task-project/common");
 const auth_module_1 = require("../auth/auth.module");
 let ColumnsModule = class ColumnsModule {
 };
@@ -19,7 +19,7 @@ exports.ColumnsModule = ColumnsModule = __decorate([
     (0, common_1.Module)({
         imports: [(0, common_1.forwardRef)(() => auth_module_1.AuthModule)],
         controllers: [columns_controller_1.ColumnsController],
-        providers: [columns_service_1.ColumnsService, prisma_service_1.PrismaService],
+        providers: [columns_service_1.ColumnsService, common_2.PrismaService],
     })
 ], ColumnsModule);
 //# sourceMappingURL=columns.module.js.map

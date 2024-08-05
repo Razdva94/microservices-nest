@@ -13,7 +13,7 @@ const users_module_1 = require("./users/users.module");
 const users_controller_1 = require("./users/users.controller");
 const users_service_1 = require("./users/users.service");
 const config_1 = require("@nestjs/config");
-const prisma_service_1 = require("./prisma.service");
+const common_2 = require("@task-project/common");
 const auth_controller_1 = require("./auth/auth.controller");
 const auth_module_1 = require("./auth/auth.module");
 const tasks_module_1 = require("./tasks/tasks.module");
@@ -26,7 +26,7 @@ exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         controllers: [users_controller_1.UsersController, auth_controller_1.AuthController],
-        providers: [users_service_1.UsersService, prisma_service_1.PrismaService, auth_service_1.AuthService],
+        providers: [users_service_1.UsersService, common_2.PrismaService, auth_service_1.AuthService],
         imports: [
             config_1.ConfigModule.forRoot({
                 envFilePath: `.env`,

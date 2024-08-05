@@ -10,7 +10,7 @@ import { UsersService } from 'src/users/users.service';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import * as bcrypt from 'bcryptjs';
 import { User } from 'src/users/users.model';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '@task-project/common';
 import { LoginUserDto } from 'src/auth/dto/login-user.dto';
 import { Response } from 'express';
 import { RefreshToken } from './token.model';

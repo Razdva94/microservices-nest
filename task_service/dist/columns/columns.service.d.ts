@@ -1,7 +1,7 @@
 import { CreateColumnDto } from './dto/create-column.dto';
 import { RequestWithUserId } from 'src/types/types';
 import { UpdateColumnDto } from './dto/update-column.dto';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '@task-project/common';
 declare class ColumnsService {
     private prisma;
     moveColumn(id: number, oldPosition: number, newPosition: number, projectId: number, req: RequestWithUserId): Promise<string | {

@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ColumnsService = void 0;
 const common_1 = require("@nestjs/common");
-const prisma_service_1 = require("../prisma.service");
+const common_2 = require("@task-project/common");
 const enums_1 = require("../enums/enums");
 let ColumnsService = class ColumnsService {
     async moveColumn(id, oldPosition, newPosition, projectId, req) {
@@ -152,6 +152,6 @@ let ColumnsService = class ColumnsService {
 exports.ColumnsService = ColumnsService;
 exports.ColumnsService = ColumnsService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [common_2.PrismaService])
 ], ColumnsService);
 //# sourceMappingURL=columns.service.js.map

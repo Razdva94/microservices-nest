@@ -1,5 +1,5 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService } from '@task-project/common';
 import { CreateTaskFieldDto } from './dto/create-task-filed.dto';
 import { UpdateTaskFieldDto } from './dto/update-task-field.dto';
 import { FieldType, TaskFieldEnumOptions } from '@prisma/client';

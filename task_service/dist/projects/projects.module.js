@@ -11,7 +11,7 @@ const common_1 = require("@nestjs/common");
 const projects_controller_1 = require("./projects.controller");
 const projects_service_1 = require("./projects.service");
 const auth_module_1 = require("../auth/auth.module");
-const prisma_service_1 = require("../prisma.service");
+const common_2 = require("@task-project/common");
 let ProjectsModule = class ProjectsModule {
 };
 exports.ProjectsModule = ProjectsModule;
@@ -19,7 +19,7 @@ exports.ProjectsModule = ProjectsModule = __decorate([
     (0, common_1.Module)({
         imports: [(0, common_1.forwardRef)(() => auth_module_1.AuthModule)],
         controllers: [projects_controller_1.ProjectsController],
-        providers: [projects_service_1.ProjectsService, prisma_service_1.PrismaService],
+        providers: [projects_service_1.ProjectsService, common_2.PrismaService],
     })
 ], ProjectsModule);
 //# sourceMappingURL=projects.module.js.map
