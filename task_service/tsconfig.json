@@ -18,5 +18,11 @@
     "noFallthroughCasesInSwitch": false,
     "strict": true,
     "forceConsistentCasingInFileNames": true
-  }
+    // "paths": {
+    //   "@task-project/package": ["node_modules/task-project-razdva1994/dist/*"]
+    // }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }
+

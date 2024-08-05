@@ -3,7 +3,9 @@ import { RequestWithUserId } from 'src/types/types';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { PrismaService } from 'src/prisma.service';
-
+console.log('Проверка импорта ConsoleService');
+import { ConsoleService } from '@task-project/common';
+console.log('Импорт выполнен успешно');
 interface Itasks {
   id: number;
   columnId: number;
@@ -27,6 +29,9 @@ enum TaskFieldValueType {
 export class ProjectsService {
   constructor(private prisma: PrismaService) {}
   async getProjects(req: RequestWithUserId) {
+    const consoleService = new ConsoleService();
+    consoleService.showConsole();
+    console.log('sdfasdf');
     const userId: number = req?.user?.id;
     if (userId === undefined) {
       throw new BadRequestException('Пользователь не найден');

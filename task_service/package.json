@@ -1,10 +1,16 @@
 {
-  "name": "task_service",
+  "name": "@task-project/task_service",
   "version": "0.0.1",
-  "description": "",
+  "description": "my project",
+  "main": "main.js",
   "author": "Antonov Danila",
-  "private": true,
   "license": "UNLICENSED",
+  "imports": {
+    "#common-service/*": {
+      "development": "@task_service/common/src/*",
+      "production": "@task_service/common/dist/*"
+    }
+  },
   "scripts": {
     "create-view": "node dist/prisma/createView.js",
     "build": "nest build",
@@ -34,6 +40,7 @@
     "@nestjs/serve-static": "^4.0.0",
     "@nestjs/swagger": "^7.1.17",
     "@prisma/client": "^5.15.0",
+    "@task-project/common": "file:../common",
     "bcryptjs": "^2.4.3",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.0",
@@ -48,7 +55,8 @@
     "pug": "^3.0.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.1",
-    "swagger-ui-express": "^5.0.0"
+    "swagger-ui-express": "^5.0.0",
+    "task-project-razdva1994": "^0.0.21"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
@@ -80,6 +88,9 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.5.3"
   },
+  "files": [
+    "dist"
+  ],
   "jest": {
     "moduleFileExtensions": [
       "js",
