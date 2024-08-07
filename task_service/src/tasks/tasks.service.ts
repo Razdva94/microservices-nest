@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { PrismaService } from '@task-project/common';
-import { RequestWithUserId } from 'src/types/types';
+import { RequestWithUserId } from '@task-project/common';
 import { Action } from 'src/enums/enums';
 
 @Injectable()

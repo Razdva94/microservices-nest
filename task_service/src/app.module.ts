@@ -1,26 +1,32 @@
-import { AuthService } from './auth/auth.service';
 import { Module } from '@nestjs/common';
-import { UsersModule } from './users/users.module';
-import { UsersController } from './users/users.controller';
-import { UsersService } from './users/users.service';
 import { ConfigModule } from '@nestjs/config';
 import { PrismaService } from '@task-project/common';
-import { AuthController } from './auth/auth.controller';
-import { AuthModule } from './auth/auth.module';
 import { TasksModule } from './tasks/tasks.module';
 import { ColumnsModule } from './columns/columns.module';
 import { ProjectsModule } from './projects/projects.module';
 import { TaskFieldsModule } from './task-fields/task-fields.module';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+import { RabbitService } from './rabbit/rabbit.service';
 
 @Module({
-  controllers: [UsersController, AuthController],
-  providers: [UsersService, PrismaService, AuthService],
+  providers: [PrismaService, RabbitService],
   imports: [
     ConfigModule.forRoot({
       envFilePath: `.env`,
     }),
-    UsersModule,
-    AuthModule,
+    ClientsModule.register([
+      {
+        name: 'AUTH_SERVICE',
+        transport: Transport.RMQ,
+        options: {
+          urls: ['amqp://localhost:5672'],
+          queue: 'auth_service_queue',
+          queueOptions: {
+            durable: true,
+          },
+        },
+      },
+    ]),
     TasksModule,
     ColumnsModule,
     ProjectsModule,

@@ -12,7 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProjectsService = void 0;
 const common_1 = require("@nestjs/common");
 const common_2 = require("@task-project/common");
-const common_3 = require("@task-project/common");
+const rabbit_service_1 = require("../rabbit/rabbit.service");
 var TaskFieldValueType;
 (function (TaskFieldValueType) {
     TaskFieldValueType["ENUM"] = "TaskFieldValueEnum";
@@ -20,12 +20,12 @@ var TaskFieldValueType;
     TaskFieldValueType["STRING"] = "TaskFieldValueString";
 })(TaskFieldValueType || (TaskFieldValueType = {}));
 let ProjectsService = class ProjectsService {
-    constructor(prisma) {
+    constructor(prisma, rabbitService) {
         this.prisma = prisma;
+        this.rabbitService = rabbitService;
     }
     async getProjects(req) {
-        const consoleService = new common_3.ConsoleService();
-        consoleService.showConsole();
+        await this.rabbitService.sendToken(req);
         const userId = req?.user?.id;
         if (userId === undefined) {
             throw new common_1.BadRequestException('Пользователь не найден');
@@ -160,6 +160,7 @@ let ProjectsService = class ProjectsService {
 exports.ProjectsService = ProjectsService;
 exports.ProjectsService = ProjectsService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [common_2.PrismaService])
+    __metadata("design:paramtypes", [common_2.PrismaService,
+        rabbit_service_1.RabbitService])
 ], ProjectsService);
 //# sourceMappingURL=projects.service.js.map

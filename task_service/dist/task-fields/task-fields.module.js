@@ -10,14 +10,12 @@ exports.TaskFieldsModule = void 0;
 const common_1 = require("@nestjs/common");
 const task_fields_controller_1 = require("./task-fields.controller");
 const task_fields_service_1 = require("./task-fields.service");
-const auth_module_1 = require("../auth/auth.module");
 const common_2 = require("@task-project/common");
 let TaskFieldsModule = class TaskFieldsModule {
 };
 exports.TaskFieldsModule = TaskFieldsModule;
 exports.TaskFieldsModule = TaskFieldsModule = __decorate([
     (0, common_1.Module)({
-        imports: [(0, common_1.forwardRef)(() => auth_module_1.AuthModule)],
         controllers: [task_fields_controller_1.TaskFieldsController],
         providers: [task_fields_service_1.TaskFieldsService, common_2.PrismaService],
     })

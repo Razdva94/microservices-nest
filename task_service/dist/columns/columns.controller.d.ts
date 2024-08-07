@@ -1,6 +1,6 @@
+import { RequestWithUserId } from '@task-project/common';
 import { ColumnsService } from './columns.service';
 import { CreateColumnDto } from './dto/create-column.dto';
-import { RequestWithUserId } from 'src/types/types';
 import { NextFunction } from 'express';
 import { Response } from 'express';
 import { UpdateColumnDto } from './dto/update-column.dto';

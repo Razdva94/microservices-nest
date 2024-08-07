@@ -3,7 +3,7 @@ import { PrismaService } from '@task-project/common';
 import { CreateTaskFieldDto } from './dto/create-task-filed.dto';
 import { UpdateTaskFieldDto } from './dto/update-task-field.dto';
 import { FieldType, TaskFieldEnumOptions } from '@prisma/client';
-import { RequestWithUserId } from 'src/types/types';
+import { RequestWithUserId } from '@task-project/common';
 import { Action } from 'src/enums/enums';
 
 interface IFindOrCreateExtra {

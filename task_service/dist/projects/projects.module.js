@@ -10,16 +10,30 @@ exports.ProjectsModule = void 0;
 const common_1 = require("@nestjs/common");
 const projects_controller_1 = require("./projects.controller");
 const projects_service_1 = require("./projects.service");
-const auth_module_1 = require("../auth/auth.module");
 const common_2 = require("@task-project/common");
+const rabbit_service_1 = require("../rabbit/rabbit.service");
+const clients_module_1 = require("@nestjs/microservices/module/clients.module");
+const microservices_1 = require("@nestjs/microservices");
 let ProjectsModule = class ProjectsModule {
 };
 exports.ProjectsModule = ProjectsModule;
 exports.ProjectsModule = ProjectsModule = __decorate([
     (0, common_1.Module)({
-        imports: [(0, common_1.forwardRef)(() => auth_module_1.AuthModule)],
+        imports: [
+            clients_module_1.ClientsModule.register([
+                {
+                    name: 'AUTH_SERVICE',
+                    transport: microservices_1.Transport.RMQ,
+                    options: {
+                        urls: ['amqp://localhost:5672'],
+                        queue: 'auth_service_queue',
+                        queueOptions: { durable: true },
+                    },
+                },
+            ]),
+        ],
         controllers: [projects_controller_1.ProjectsController],
-        providers: [projects_service_1.ProjectsService, common_2.PrismaService],
+        providers: [projects_service_1.ProjectsService, common_2.PrismaService, rabbit_service_1.RabbitService],
     })
 ], ProjectsModule);
 //# sourceMappingURL=projects.module.js.map

@@ -5,8 +5,21 @@ const app_module_1 = require("./app.module");
 const cookieParser = require("cookie-parser");
 const swagger_1 = require("@nestjs/swagger");
 const common_1 = require("@task-project/common");
+const common_2 = require("@task-project/common");
+const microservices_1 = require("@nestjs/microservices");
 async function start() {
     const PORT = process.env.PORT || 5000;
+    const app1 = await core_1.NestFactory.createMicroservice(app_module_1.AppModule, {
+        transport: microservices_1.Transport.RMQ,
+        options: {
+            urls: ['amqp://localhost:5672'],
+            queue: 'task_service_queue',
+            queueOptions: {
+                durable: true,
+            },
+        },
+    });
+    await app1.listen();
     const app = await core_1.NestFactory.create(app_module_1.AppModule);
     app.setViewEngine('hbs');
     app.enableCors();
@@ -19,7 +32,8 @@ async function start() {
         .addTag('Razdva project')
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, config);
-    swagger_1.SwaggerModule.setup('/api/docs', app, document);
+    swagger_1.SwaggerModule.setup('/api/task-docs', app, document);
+    app.useGlobalPipes(new common_2.ValidationPipe());
     app.useGlobalFilters(new common_1.AllExceptionsFilter());
     await app.listen(PORT, () => console.log(`Server started on port = ${PORT}`));
 }

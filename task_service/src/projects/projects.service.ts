@@ -1,10 +1,9 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { RequestWithUserId } from 'src/types/types';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
-import { PrismaService } from '@task-project/common';
-import { ConsoleService } from '@task-project/common';
+import { PrismaService, RequestWithUserId } from '@task-project/common';
 import { Projects } from '@prisma/client';
+import { RabbitService } from 'src/rabbit/rabbit.service';
 
 interface Itasks {
   id: number;
@@ -27,10 +26,12 @@ enum TaskFieldValueType {
 }
 @Injectable()
 export class ProjectsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private rabbitService: RabbitService,
+  ) {}
   async getProjects(req: RequestWithUserId) {
-    const consoleService = new ConsoleService();
-    consoleService.showConsole();
+    await this.rabbitService.sendToken(req);
     const userId: number = req?.user?.id;
     if (userId === undefined) {
       throw new BadRequestException('Пользователь не найден');

@@ -9,16 +9,13 @@ import {
   Post,
   Req,
   Res,
-  UseGuards,
   UsePipes,
 } from '@nestjs/common';
 import { NextFunction } from 'express';
 import { ValidationPipe } from '@task-project/common';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { RequestWithUserId } from 'src/types/types';
+import { RequestWithUserId, CustomError } from '@task-project/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { Response } from 'express';
-import { CustomError } from 'src/types/types';
 import { ProjectsService } from './projects.service';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import {
@@ -40,7 +37,6 @@ export class ProjectsController {
     description: 'Возврат созданного проекта',
   })
   @Post('/create')
-  @UseGuards(JwtAuthGuard)
   @UsePipes(ValidationPipe)
   async createProject(
     @Body() projectDto: CreateProjectDto,
@@ -67,7 +63,6 @@ export class ProjectsController {
     description: 'Возврат обновленного проекта',
   })
   @Patch('/update/:id')
-  @UseGuards(JwtAuthGuard)
   @UsePipes(ValidationPipe)
   async updateProject(
     @Param('id') id: string,
@@ -99,7 +94,6 @@ export class ProjectsController {
     description: 'Информация по удаленному проекта',
   })
   @Delete('/delete/:id')
-  @UseGuards(JwtAuthGuard)
   async deleteProject(
     @Param('id') id: string,
     @Req() req: RequestWithUserId,
@@ -125,7 +119,6 @@ export class ProjectsController {
     description: 'Информация по проектам пользователя',
   })
   @Get('/receive')
-  @UseGuards(JwtAuthGuard)
   async getProjects(
     @Req() req: RequestWithUserId,
     @Res() res: Response,

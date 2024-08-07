@@ -2,7 +2,7 @@ import { PrismaService } from '@task-project/common';
 import { CreateTaskFieldDto } from './dto/create-task-filed.dto';
 import { UpdateTaskFieldDto } from './dto/update-task-field.dto';
 import { TaskFieldEnumOptions } from '@prisma/client';
-import { RequestWithUserId } from 'src/types/types';
+import { RequestWithUserId } from '@task-project/common';
 interface ITaskFieldValue {
     taskId: number;
     taskFieldId: number;
