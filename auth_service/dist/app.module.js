@@ -16,7 +16,6 @@ const auth_module_1 = require("./auth/auth.module");
 const users_controller_1 = require("./users/users.controller");
 const users_module_1 = require("./users/users.module");
 const rabbit_service_1 = require("./rabbit/rabbit.service");
-const microservices_1 = require("@nestjs/microservices");
 const rabbit_controller_1 = require("./rabbit/rabbit.controller");
 let AppModule = class AppModule {
 };
@@ -29,19 +28,6 @@ exports.AppModule = AppModule = __decorate([
             config_1.ConfigModule.forRoot({
                 envFilePath: `.env`,
             }),
-            microservices_1.ClientsModule.register([
-                {
-                    name: 'TASK_SERVICE',
-                    transport: microservices_1.Transport.RMQ,
-                    options: {
-                        urls: ['amqp://localhost:5672'],
-                        queue: 'task_service_queue',
-                        queueOptions: {
-                            durable: true,
-                        },
-                    },
-                },
-            ]),
             auth_module_1.AuthModule,
             users_module_1.UsersModule,
         ],

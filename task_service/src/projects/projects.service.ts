@@ -1,10 +1,9 @@
-import { BadRequestException, Inject, Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
 import { PrismaService, RequestWithUserId } from '@task-project/common';
 import { Projects } from '@prisma/client';
 import { RabbitService } from 'src/rabbit/rabbit.service';
-import { ClientProxy } from '@nestjs/microservices';
 
 interface Itasks {
   id: number;
@@ -30,7 +29,6 @@ export class ProjectsService {
   constructor(
     private prisma: PrismaService,
     private rabbitService: RabbitService,
-    @Inject('AUTH_SERVICE') private readonly client: ClientProxy,
   ) {}
   async getProjects(req: RequestWithUserId) {
     const userInfo: any = await this.rabbitService.sendToken(req);

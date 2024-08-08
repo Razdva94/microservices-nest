@@ -28,7 +28,7 @@ exports.AppModule = AppModule = __decorate([
             }),
             microservices_1.ClientsModule.register([
                 {
-                    name: 'AUTH_SERVICE',
+                    name: 'USER_INFO_TRANSPORT',
                     transport: microservices_1.Transport.RMQ,
                     options: {
                         urls: ['amqp://localhost:5672'],

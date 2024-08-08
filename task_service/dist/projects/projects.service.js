@@ -8,15 +8,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProjectsService = void 0;
 const common_1 = require("@nestjs/common");
 const common_2 = require("@task-project/common");
 const rabbit_service_1 = require("../rabbit/rabbit.service");
-const microservices_1 = require("@nestjs/microservices");
 var TaskFieldValueType;
 (function (TaskFieldValueType) {
     TaskFieldValueType["ENUM"] = "TaskFieldValueEnum";
@@ -24,10 +20,9 @@ var TaskFieldValueType;
     TaskFieldValueType["STRING"] = "TaskFieldValueString";
 })(TaskFieldValueType || (TaskFieldValueType = {}));
 let ProjectsService = class ProjectsService {
-    constructor(prisma, rabbitService, client) {
+    constructor(prisma, rabbitService) {
         this.prisma = prisma;
         this.rabbitService = rabbitService;
-        this.client = client;
     }
     async getProjects(req) {
         const userInfo = await this.rabbitService.sendToken(req);
@@ -166,9 +161,7 @@ let ProjectsService = class ProjectsService {
 exports.ProjectsService = ProjectsService;
 exports.ProjectsService = ProjectsService = __decorate([
     (0, common_1.Injectable)(),
-    __param(2, (0, common_1.Inject)('AUTH_SERVICE')),
     __metadata("design:paramtypes", [common_2.PrismaService,
-        rabbit_service_1.RabbitService,
-        microservices_1.ClientProxy])
+        rabbit_service_1.RabbitService])
 ], ProjectsService);
 //# sourceMappingURL=projects.service.js.map

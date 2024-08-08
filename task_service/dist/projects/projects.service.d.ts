@@ -3,12 +3,10 @@ import { UpdateProjectDto } from './dto/update-project.dto';
 import { PrismaService, RequestWithUserId } from '@task-project/common';
 import { Projects } from '@prisma/client';
 import { RabbitService } from 'src/rabbit/rabbit.service';
-import { ClientProxy } from '@nestjs/microservices';
 export declare class ProjectsService {
     private prisma;
     private rabbitService;
-    private readonly client;
-    constructor(prisma: PrismaService, rabbitService: RabbitService, client: ClientProxy);
+    constructor(prisma: PrismaService, rabbitService: RabbitService);
     getProjects(req: RequestWithUserId): Promise<{
         names: string[];
         projectEntities: {

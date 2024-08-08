@@ -31,7 +31,7 @@ let RabbitService = class RabbitService {
 exports.RabbitService = RabbitService;
 exports.RabbitService = RabbitService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, common_1.Inject)('AUTH_SERVICE')),
+    __param(0, (0, common_1.Inject)('USER_INFO_TRANSPORT')),
     __metadata("design:paramtypes", [microservices_1.ClientProxy])
 ], RabbitService);
 //# sourceMappingURL=rabbit.service.js.map

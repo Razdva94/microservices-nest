@@ -5,7 +5,9 @@ import { firstValueFrom } from 'rxjs';
 
 @Injectable()
 export class RabbitService {
-  constructor(@Inject('AUTH_SERVICE') private readonly client: ClientProxy) {}
+  constructor(
+    @Inject('USER_INFO_TRANSPORT') private readonly client: ClientProxy,
+  ) {}
 
   async sendToken(req: RequestWithUserId) {
     const authHeader = req.headers?.authorization;

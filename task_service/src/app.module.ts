@@ -16,7 +16,7 @@ import { RabbitService } from './rabbit/rabbit.service';
     }),
     ClientsModule.register([
       {
-        name: 'AUTH_SERVICE',
+        name: 'USER_INFO_TRANSPORT',
         transport: Transport.RMQ,
         options: {
           urls: ['amqp://localhost:5672'],

@@ -22,7 +22,7 @@ exports.ProjectsModule = ProjectsModule = __decorate([
         imports: [
             clients_module_1.ClientsModule.register([
                 {
-                    name: 'AUTH_SERVICE',
+                    name: 'USER_INFO_TRANSPORT',
                     transport: microservices_1.Transport.RMQ,
                     options: {
                         urls: ['amqp://localhost:5672'],
