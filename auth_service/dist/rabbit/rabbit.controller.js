@@ -21,12 +21,14 @@ let AppController = class AppController {
         this.rabbitService = rabbitService;
     }
     async handleEvent(data) {
-        await this.rabbitService.handleEvent(data);
+        const user = await this.rabbitService.handleEvent(data);
+        console.log(user);
+        return user;
     }
 };
 exports.AppController = AppController;
 __decorate([
-    (0, microservices_1.EventPattern)('send_token'),
+    (0, microservices_1.MessagePattern)('send_token'),
     __param(0, (0, microservices_1.Payload)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

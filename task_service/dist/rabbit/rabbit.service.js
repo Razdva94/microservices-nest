@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RabbitService = void 0;
 const common_1 = require("@nestjs/common");
 const microservices_1 = require("@nestjs/microservices");
+const rxjs_1 = require("rxjs");
 let RabbitService = class RabbitService {
     constructor(client) {
         this.client = client;
@@ -22,7 +23,9 @@ let RabbitService = class RabbitService {
     async sendToken(req) {
         const authHeader = req.headers?.authorization;
         const token = authHeader.split(' ')[1];
-        return this.client.emit('send_token', token);
+        const observable = this.client.send('send_token', token);
+        const user = await (0, rxjs_1.firstValueFrom)(observable);
+        return user;
     }
 };
 exports.RabbitService = RabbitService;
