@@ -31,9 +31,7 @@ export class ProjectsService {
     private rabbitService: RabbitService,
   ) {}
   async getProjects(req: RequestWithUserId) {
-    const userInfo: any = await this.rabbitService.sendToken(req);
-    console.log(userInfo);
-    // Используем полученные данные для дальнейших действий
+    const userInfo: { id: number } = await this.rabbitService.sendToken(req);
     const userId: number = userInfo?.id;
     if (userId === undefined) {
       throw new BadRequestException('Пользователь не найден');
@@ -162,7 +160,8 @@ export class ProjectsService {
     return { names, projectEntities };
   }
   async createProject(dto: CreateProjectDto, req: RequestWithUserId) {
-    const userId: number = req?.user?.id;
+    const userInfo: { id: number } = await this.rabbitService.sendToken(req);
+    const userId: number = userInfo?.id;
     if (userId === undefined) {
       throw new BadRequestException('Пользователь не найден');
     }
@@ -191,17 +190,18 @@ export class ProjectsService {
       message: `Проект ${project.name} удален со всеми задачами`,
     };
   }
-  updateProject(
+  async updateProject(
     ProjectDto: UpdateProjectDto,
     id: number,
     req: RequestWithUserId,
   ): Promise<Projects> {
-    const userId: number = req?.user?.id;
+    const userInfo: { id: number } = await this.rabbitService.sendToken(req);
+    const userId: number = userInfo?.id;
     if (userId === undefined) {
       throw new BadRequestException('Пользователь не найден');
     }
 
-    const project = this.prisma.projects.update({
+    const project = await this.prisma.projects.update({
       where: {
         id: id,
         userId: userId,

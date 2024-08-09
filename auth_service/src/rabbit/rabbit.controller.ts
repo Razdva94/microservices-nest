@@ -9,7 +9,6 @@ export class AppController {
   @MessagePattern('send_token')
   async handleEvent(@Payload() data: string) {
     const user = await this.rabbitService.handleEvent(data);
-    console.log(user);
     return user;
   }
 }

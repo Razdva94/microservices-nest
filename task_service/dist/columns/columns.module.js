@@ -11,13 +11,28 @@ const common_1 = require("@nestjs/common");
 const columns_controller_1 = require("./columns.controller");
 const columns_service_1 = require("./columns.service");
 const common_2 = require("@task-project/common");
+const microservices_1 = require("@nestjs/microservices");
+const rabbit_service_1 = require("../rabbit/rabbit.service");
 let ColumnsModule = class ColumnsModule {
 };
 exports.ColumnsModule = ColumnsModule;
 exports.ColumnsModule = ColumnsModule = __decorate([
     (0, common_1.Module)({
         controllers: [columns_controller_1.ColumnsController],
-        providers: [columns_service_1.ColumnsService, common_2.PrismaService],
+        imports: [
+            microservices_1.ClientsModule.register([
+                {
+                    name: 'USER_INFO_TRANSPORT',
+                    transport: microservices_1.Transport.RMQ,
+                    options: {
+                        urls: ['amqp://localhost:5672'],
+                        queue: 'auth_service_queue',
+                        queueOptions: { durable: true },
+                    },
+                },
+            ]),
+        ],
+        providers: [columns_service_1.ColumnsService, common_2.PrismaService, rabbit_service_1.RabbitService],
     })
 ], ColumnsModule);
 //# sourceMappingURL=columns.module.js.map

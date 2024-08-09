@@ -3,6 +3,7 @@ import { CreateTaskFieldDto } from './dto/create-task-filed.dto';
 import { UpdateTaskFieldDto } from './dto/update-task-field.dto';
 import { TaskFieldEnumOptions } from '@prisma/client';
 import { RequestWithUserId } from '@task-project/common';
+import { RabbitService } from 'src/rabbit/rabbit.service';
 interface ITaskFieldValue {
     taskId: number;
     taskFieldId: number;
@@ -10,7 +11,8 @@ interface ITaskFieldValue {
 }
 export declare class TaskFieldsService {
     private prisma;
-    constructor(prisma: PrismaService);
+    private rabbitService;
+    constructor(prisma: PrismaService, rabbitService: RabbitService);
     updateTaskField(taskFieldDto: UpdateTaskFieldDto, req: RequestWithUserId, projectId: number, taskId: number, taskFieldId: number): Promise<{
         updatedTaskField: {
             id: number;

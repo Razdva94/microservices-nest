@@ -11,13 +11,28 @@ const common_1 = require("@nestjs/common");
 const task_fields_controller_1 = require("./task-fields.controller");
 const task_fields_service_1 = require("./task-fields.service");
 const common_2 = require("@task-project/common");
+const microservices_1 = require("@nestjs/microservices");
+const rabbit_service_1 = require("../rabbit/rabbit.service");
 let TaskFieldsModule = class TaskFieldsModule {
 };
 exports.TaskFieldsModule = TaskFieldsModule;
 exports.TaskFieldsModule = TaskFieldsModule = __decorate([
     (0, common_1.Module)({
         controllers: [task_fields_controller_1.TaskFieldsController],
-        providers: [task_fields_service_1.TaskFieldsService, common_2.PrismaService],
+        imports: [
+            microservices_1.ClientsModule.register([
+                {
+                    name: 'USER_INFO_TRANSPORT',
+                    transport: microservices_1.Transport.RMQ,
+                    options: {
+                        urls: ['amqp://localhost:5672'],
+                        queue: 'auth_service_queue',
+                        queueOptions: { durable: true },
+                    },
+                },
+            ]),
+        ],
+        providers: [task_fields_service_1.TaskFieldsService, common_2.PrismaService, rabbit_service_1.RabbitService],
     })
 ], TaskFieldsModule);
 //# sourceMappingURL=task-fields.module.js.map

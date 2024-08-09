@@ -11,13 +11,28 @@ const common_1 = require("@nestjs/common");
 const tasks_controller_1 = require("./tasks.controller");
 const tasks_service_1 = require("./tasks.service");
 const common_2 = require("@task-project/common");
+const microservices_1 = require("@nestjs/microservices");
+const rabbit_service_1 = require("../rabbit/rabbit.service");
 let TasksModule = class TasksModule {
 };
 exports.TasksModule = TasksModule;
 exports.TasksModule = TasksModule = __decorate([
     (0, common_1.Module)({
         controllers: [tasks_controller_1.TasksController],
-        providers: [tasks_service_1.TasksService, common_2.PrismaService],
+        imports: [
+            microservices_1.ClientsModule.register([
+                {
+                    name: 'USER_INFO_TRANSPORT',
+                    transport: microservices_1.Transport.RMQ,
+                    options: {
+                        urls: ['amqp://localhost:5672'],
+                        queue: 'auth_service_queue',
+                        queueOptions: { durable: true },
+                    },
+                },
+            ]),
+        ],
+        providers: [tasks_service_1.TasksService, common_2.PrismaService, rabbit_service_1.RabbitService],
     })
 ], TasksModule);
 //# sourceMappingURL=tasks.module.js.map

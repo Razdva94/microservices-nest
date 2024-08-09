@@ -2,9 +2,11 @@ import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { PrismaService } from '@task-project/common';
 import { RequestWithUserId } from '@task-project/common';
+import { RabbitService } from 'src/rabbit/rabbit.service';
 declare class TasksService {
     private prisma;
-    constructor(prisma: PrismaService);
+    private rabbitService;
+    constructor(prisma: PrismaService, rabbitService: RabbitService);
     moveTaskToOtherColumn(id: number, oldPosition: number, newPosition: number, projectId: number, newColumnId: number, req: RequestWithUserId): Promise<string>;
     moveTaskWithinColumn(id: number, oldPosition: number, newPosition: number, projectId: number, req: RequestWithUserId): Promise<string | {
         id: number;

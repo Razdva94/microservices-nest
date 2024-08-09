@@ -14,6 +14,7 @@ const common_1 = require("@nestjs/common");
 const common_2 = require("@task-project/common");
 const client_1 = require("@prisma/client");
 const enums_1 = require("../enums/enums");
+const rabbit_service_1 = require("../rabbit/rabbit.service");
 var TaskFieldName;
 (function (TaskFieldName) {
     TaskFieldName["ENUM"] = "TaskFieldValueEnum";
@@ -21,11 +22,13 @@ var TaskFieldName;
     TaskFieldName["STRING"] = "TaskFieldValueString";
 })(TaskFieldName || (TaskFieldName = {}));
 let TaskFieldsService = class TaskFieldsService {
-    constructor(prisma) {
+    constructor(prisma, rabbitService) {
         this.prisma = prisma;
+        this.rabbitService = rabbitService;
     }
     async updateTaskField(taskFieldDto, req, projectId, taskId, taskFieldId) {
-        const userId = req?.user?.id;
+        const userInfo = await this.rabbitService.sendToken(req);
+        const userId = userInfo?.id;
         await this.validateUserProject(userId, projectId, enums_1.Action.Редактировать);
         const taskField = await this.prisma.taskField.findFirst({
             where: {
@@ -72,7 +75,8 @@ let TaskFieldsService = class TaskFieldsService {
         return { updatedTaskField, taskFieldValue };
     }
     async createTaskField(taskFieldDto, req, projectId, taskId) {
-        const userId = req?.user?.id;
+        const userInfo = await this.rabbitService.sendToken(req);
+        const userId = userInfo?.id;
         await this.validateUserProject(userId, projectId, enums_1.Action.Создать);
         const { value } = taskFieldDto;
         const fieldType = this.determineFieldType(value);
@@ -81,7 +85,8 @@ let TaskFieldsService = class TaskFieldsService {
         return taskFieldDto;
     }
     async deleteTaskField(req, projectId, taskFieldId) {
-        const userId = req?.user?.id;
+        const userInfo = await this.rabbitService.sendToken(req);
+        const userId = userInfo?.id;
         await this.validateUserProject(userId, projectId, enums_1.Action.Удалить);
         return await this.prisma.taskField.delete({
             where: {
@@ -163,6 +168,7 @@ let TaskFieldsService = class TaskFieldsService {
 exports.TaskFieldsService = TaskFieldsService;
 exports.TaskFieldsService = TaskFieldsService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [common_2.PrismaService])
+    __metadata("design:paramtypes", [common_2.PrismaService,
+        rabbit_service_1.RabbitService])
 ], TaskFieldsService);
 //# sourceMappingURL=task-fields.service.js.map
