@@ -14,8 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProjectsController = void 0;
 const common_1 = require("@nestjs/common");
-const common_2 = require("@task-project/common");
-const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
+const task_project_razdva1994_1 = require("task-project-razdva1994");
 const create_project_dto_1 = require("./dto/create-project.dto");
 const projects_service_1 = require("./projects.service");
 const update_project_dto_1 = require("./dto/update-project.dto");
@@ -85,8 +84,7 @@ __decorate([
         description: 'Возврат созданного проекта',
     }),
     (0, common_1.Post)('/create'),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.UsePipes)(common_2.ValidationPipe),
+    (0, common_1.UsePipes)(task_project_razdva1994_1.ValidationPipe),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Req)()),
     __param(2, (0, common_1.Next)()),
@@ -103,8 +101,7 @@ __decorate([
         description: 'Возврат обновленного проекта',
     }),
     (0, common_1.Patch)('/update/:id'),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.UsePipes)(common_2.ValidationPipe),
+    (0, common_1.UsePipes)(task_project_razdva1994_1.ValidationPipe),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __param(2, (0, common_1.Req)()),
@@ -122,7 +119,6 @@ __decorate([
         description: 'Информация по удаленному проекта',
     }),
     (0, common_1.Delete)('/delete/:id'),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Req)()),
     __param(2, (0, common_1.Res)()),
@@ -140,7 +136,6 @@ __decorate([
         description: 'Информация по проектам пользователя',
     }),
     (0, common_1.Get)('/receive'),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
     __param(0, (0, common_1.Req)()),
     __param(1, (0, common_1.Res)()),
     __param(2, (0, common_1.Next)()),

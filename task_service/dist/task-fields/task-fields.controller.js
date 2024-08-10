@@ -15,8 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskFieldsController = void 0;
 const common_1 = require("@nestjs/common");
 const task_fields_service_1 = require("./task-fields.service");
-const common_2 = require("@task-project/common");
-const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
+const task_project_razdva1994_1 = require("task-project-razdva1994");
 const create_task_filed_dto_1 = require("./dto/create-task-filed.dto");
 const swagger_1 = require("@nestjs/swagger");
 let TaskFieldsController = class TaskFieldsController {
@@ -77,8 +76,7 @@ __decorate([
     (0, swagger_1.ApiQuery)({ name: 'projectId', description: 'Идентификатор проекта' }),
     (0, swagger_1.ApiParam)({ name: 'taskId', description: 'Идентификатор задачи' }),
     (0, common_1.Post)('/create'),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.UsePipes)(common_2.ValidationPipe),
+    (0, common_1.UsePipes)(task_project_razdva1994_1.ValidationPipe),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Next)()),
     __param(2, (0, common_1.Res)()),
@@ -98,8 +96,7 @@ __decorate([
     (0, swagger_1.ApiQuery)({ name: 'projectId', description: 'Идентификатор проекта' }),
     (0, swagger_1.ApiParam)({ name: 'taskFieldId', description: 'Идентификатор поля' }),
     (0, common_1.Patch)('/update/:taskFieldId'),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.UsePipes)(common_2.ValidationPipe),
+    (0, common_1.UsePipes)(task_project_razdva1994_1.ValidationPipe),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Next)()),
     __param(2, (0, common_1.Res)()),
@@ -120,8 +117,7 @@ __decorate([
     (0, swagger_1.ApiQuery)({ name: 'projectId', description: 'Идентификатор проекта' }),
     (0, swagger_1.ApiParam)({ name: 'taskFieldId', description: 'Идентификатор поля' }),
     (0, common_1.Delete)('/delete/:taskFieldId'),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.UsePipes)(common_2.ValidationPipe),
+    (0, common_1.UsePipes)(task_project_razdva1994_1.ValidationPipe),
     __param(0, (0, common_1.Next)()),
     __param(1, (0, common_1.Res)()),
     __param(2, (0, common_1.Req)()),

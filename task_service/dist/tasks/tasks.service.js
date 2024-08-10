@@ -11,14 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TasksService = void 0;
 const common_1 = require("@nestjs/common");
-const common_2 = require("@task-project/common");
+const task_project_razdva1994_1 = require("task-project-razdva1994");
 const enums_1 = require("../enums/enums");
+const rabbit_service_1 = require("../rabbit/rabbit.service");
 let TasksService = class TasksService {
-    constructor(prisma) {
+    constructor(prisma, rabbitService) {
         this.prisma = prisma;
+        this.rabbitService = rabbitService;
     }
     async moveTaskToOtherColumn(id, oldPosition, newPosition, projectId, newColumnId, req) {
-        const userId = req?.user?.id;
+        const userInfo = await this.rabbitService.sendToken(req);
+        const userId = userInfo?.id;
         await this.validateUserProject(userId, projectId, enums_1.Action.Переместить);
         const task = await this.prisma.tasks.findFirst({
             where: {
@@ -88,7 +91,8 @@ let TasksService = class TasksService {
         return `Задача ${newTask.name} перемещена c ${oldPosition} на ${newPosition} позицию в колонку ${newColumn.name}`;
     }
     async moveTaskWithinColumn(id, oldPosition, newPosition, projectId, req) {
-        const userId = req?.user?.id;
+        const userInfo = await this.rabbitService.sendToken(req);
+        const userId = userInfo?.id;
         await this.validateUserProject(userId, projectId, enums_1.Action.Переместить);
         const task = await this.prisma.tasks.findFirst({
             where: {
@@ -156,7 +160,8 @@ let TasksService = class TasksService {
         return `Задача ${newTask.name} перемещена c ${oldPosition} на ${newPosition} позицию в колонке ${column.name}`;
     }
     async createTask(dto, req, projectId) {
-        const userId = req?.user?.id;
+        const userInfo = await this.rabbitService.sendToken(req);
+        const userId = userInfo?.id;
         await this.validateUserProject(userId, projectId, enums_1.Action.Создать);
         const column = await this.prisma.columns.findFirst({
             where: {
@@ -188,7 +193,8 @@ let TasksService = class TasksService {
         return task;
     }
     async updateTask(dto, id, req, projectId) {
-        const userId = req?.user?.id;
+        const userInfo = await this.rabbitService.sendToken(req);
+        const userId = userInfo?.id;
         await this.validateUserProject(userId, projectId, enums_1.Action.Редактировать);
         const task = await this.prisma.tasks.update({
             where: {
@@ -199,7 +205,8 @@ let TasksService = class TasksService {
         return task;
     }
     async deleteTask(id, req, projectId) {
-        const userId = req?.user?.id;
+        const userInfo = await this.rabbitService.sendToken(req);
+        const userId = userInfo?.id;
         await this.validateUserProject(userId, projectId, enums_1.Action.Удалить);
         const taskToDelete = await this.prisma.tasks.findUnique({
             where: { id: id },
@@ -255,6 +262,7 @@ let TasksService = class TasksService {
 exports.TasksService = TasksService;
 exports.TasksService = TasksService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [common_2.PrismaService])
+    __metadata("design:paramtypes", [task_project_razdva1994_1.PrismaService,
+        rabbit_service_1.RabbitService])
 ], TasksService);
 //# sourceMappingURL=tasks.service.js.map

@@ -8,13 +8,11 @@ import {
   Post,
   Req,
   Res,
-  UseGuards,
   UsePipes,
 } from '@nestjs/common';
 import { TaskFieldsService } from './task-fields.service';
-import { ValidationPipe } from '@task-project/common';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
-import { RequestWithUserId, CustomError } from 'src/types/types';
+import { ValidationPipe } from 'task-project-razdva1994';
+import { RequestWithUserId, CustomError } from 'task-project-razdva1994';
 import { NextFunction, Response } from 'express';
 import { CreateTaskFieldDto } from './dto/create-task-filed.dto';
 import {
@@ -39,7 +37,6 @@ export class TaskFieldsController {
   @ApiQuery({ name: 'projectId', description: 'Идентификатор проекта' })
   @ApiParam({ name: 'taskId', description: 'Идентификатор задачи' })
   @Post('/create')
-  @UseGuards(JwtAuthGuard)
   @UsePipes(ValidationPipe)
   async createTaskField(
     @Body() taskFieldDto: CreateTaskFieldDto,
@@ -74,7 +71,6 @@ export class TaskFieldsController {
   @ApiQuery({ name: 'projectId', description: 'Идентификатор проекта' })
   @ApiParam({ name: 'taskFieldId', description: 'Идентификатор поля' })
   @Patch('/update/:taskFieldId')
-  @UseGuards(JwtAuthGuard)
   @UsePipes(ValidationPipe)
   async updateTaskField(
     @Body() taskFieldDto: CreateTaskFieldDto,
@@ -111,7 +107,6 @@ export class TaskFieldsController {
   @ApiQuery({ name: 'projectId', description: 'Идентификатор проекта' })
   @ApiParam({ name: 'taskFieldId', description: 'Идентификатор поля' })
   @Delete('/delete/:taskFieldId')
-  @UseGuards(JwtAuthGuard)
   @UsePipes(ValidationPipe)
   async deleteTaskField(
     @Next() next: NextFunction,

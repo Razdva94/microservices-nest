@@ -1,5 +1,5 @@
 import { NextFunction } from 'express';
-import { RequestWithUserId } from 'src/types/types';
+import { RequestWithUserId } from 'task-project-razdva1994';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { Response } from 'express';
 import { ProjectsService } from './projects.service';

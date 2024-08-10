@@ -1,8 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ValidationPipe = exports.ValidationException = exports.AllExceptionsFilter = exports.PrismaService = exports.ConsoleService = void 0;
-const test_service_1 = require("./services/test-service");
-Object.defineProperty(exports, "ConsoleService", { enumerable: true, get: function () { return test_service_1.ConsoleService; } });
+exports.ValidationPipe = exports.ValidationException = exports.AllExceptionsFilter = exports.PrismaService = void 0;
 const prisma_service_1 = require("./db/prisma.service");
 Object.defineProperty(exports, "PrismaService", { enumerable: true, get: function () { return prisma_service_1.PrismaService; } });
 const all_exceptions_filter_1 = require("./exceptions/all-exceptions.filter");

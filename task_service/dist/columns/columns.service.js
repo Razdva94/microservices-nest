@@ -11,11 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ColumnsService = void 0;
 const common_1 = require("@nestjs/common");
-const common_2 = require("@task-project/common");
+const task_project_razdva1994_1 = require("task-project-razdva1994");
 const enums_1 = require("../enums/enums");
+const rabbit_service_1 = require("../rabbit/rabbit.service");
 let ColumnsService = class ColumnsService {
+    constructor(prisma, rabbitService) {
+        this.prisma = prisma;
+        this.rabbitService = rabbitService;
+    }
     async moveColumn(id, oldPosition, newPosition, projectId, req) {
-        const userId = req?.user?.id;
+        const userInfo = await this.rabbitService.sendToken(req);
+        const userId = userInfo?.id;
         await this.validateUserProject(userId, projectId, enums_1.Action.Переместить);
         const column = await this.prisma.columns.findFirst({
             where: {
@@ -74,11 +80,9 @@ let ColumnsService = class ColumnsService {
         });
         return `Задача ${newColumn.name} перемещена c ${oldPosition} на ${newPosition} позицию`;
     }
-    constructor(prisma) {
-        this.prisma = prisma;
-    }
     async createColumn(dto, req, projectId) {
-        const userId = req?.user?.id;
+        const userInfo = await this.rabbitService.sendToken(req);
+        const userId = userInfo?.id;
         await this.validateUserProject(userId, projectId, enums_1.Action.Создать);
         const maxPosition = await this.prisma.columns.aggregate({
             _max: {
@@ -100,7 +104,8 @@ let ColumnsService = class ColumnsService {
         return column;
     }
     async updateColumn(dto, id, req, projectId) {
-        const userId = req?.user?.id;
+        const userInfo = await this.rabbitService.sendToken(req);
+        const userId = userInfo?.id;
         await this.validateUserProject(userId, projectId, enums_1.Action.Редактировать);
         const column = await this.prisma.columns.update({
             where: {
@@ -111,7 +116,8 @@ let ColumnsService = class ColumnsService {
         return column;
     }
     async deleteColumn(id, req, projectId) {
-        const userId = req?.user?.id;
+        const userInfo = await this.rabbitService.sendToken(req);
+        const userId = userInfo?.id;
         await this.validateUserProject(userId, projectId, enums_1.Action.Удалить);
         const columnToDelete = await this.prisma.columns.findUnique({
             where: { id: Number(id) },
@@ -152,6 +158,7 @@ let ColumnsService = class ColumnsService {
 exports.ColumnsService = ColumnsService;
 exports.ColumnsService = ColumnsService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [common_2.PrismaService])
+    __metadata("design:paramtypes", [task_project_razdva1994_1.PrismaService,
+        rabbit_service_1.RabbitService])
 ], ColumnsService);
 //# sourceMappingURL=columns.service.js.map

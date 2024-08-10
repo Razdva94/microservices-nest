@@ -11,8 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProjectsService = void 0;
 const common_1 = require("@nestjs/common");
-const common_2 = require("@task-project/common");
-const common_3 = require("@task-project/common");
+const task_project_razdva1994_1 = require("task-project-razdva1994");
+const rabbit_service_1 = require("../rabbit/rabbit.service");
 var TaskFieldValueType;
 (function (TaskFieldValueType) {
     TaskFieldValueType["ENUM"] = "TaskFieldValueEnum";
@@ -20,15 +20,15 @@ var TaskFieldValueType;
     TaskFieldValueType["STRING"] = "TaskFieldValueString";
 })(TaskFieldValueType || (TaskFieldValueType = {}));
 let ProjectsService = class ProjectsService {
-    constructor(prisma) {
+    constructor(prisma, rabbitService) {
         this.prisma = prisma;
+        this.rabbitService = rabbitService;
     }
     async getProjects(req) {
-        const consoleService = new common_3.ConsoleService();
-        consoleService.showConsole();
-        const userId = req?.user?.id;
+        const userInfo = await this.rabbitService.sendToken(req);
+        const userId = userInfo?.id;
         if (userId === undefined) {
-            throw new common_1.BadRequestException('Пользователь не найден');
+            throw new common_1.BadRequestException('Пользователь не найден');
         }
         const projects = await this.prisma.projects.findMany({
             where: {
@@ -113,7 +113,8 @@ let ProjectsService = class ProjectsService {
         return { names, projectEntities };
     }
     async createProject(dto, req) {
-        const userId = req?.user?.id;
+        const userInfo = await this.rabbitService.sendToken(req);
+        const userId = userInfo?.id;
         if (userId === undefined) {
             throw new common_1.BadRequestException('Пользователь не найден');
         }
@@ -140,12 +141,13 @@ let ProjectsService = class ProjectsService {
             message: `Проект ${project.name} удален со всеми задачами`,
         };
     }
-    updateProject(ProjectDto, id, req) {
-        const userId = req?.user?.id;
+    async updateProject(ProjectDto, id, req) {
+        const userInfo = await this.rabbitService.sendToken(req);
+        const userId = userInfo?.id;
         if (userId === undefined) {
             throw new common_1.BadRequestException('Пользователь не найден');
         }
-        const project = this.prisma.projects.update({
+        const project = await this.prisma.projects.update({
             where: {
                 id: id,
                 userId: userId,
@@ -160,6 +162,7 @@ let ProjectsService = class ProjectsService {
 exports.ProjectsService = ProjectsService;
 exports.ProjectsService = ProjectsService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [common_2.PrismaService])
+    __metadata("design:paramtypes", [task_project_razdva1994_1.PrismaService,
+        rabbit_service_1.RabbitService])
 ], ProjectsService);
 //# sourceMappingURL=projects.service.js.map

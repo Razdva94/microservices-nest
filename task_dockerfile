@@ -11,7 +11,5 @@ RUN npm install
 # Копируем остальные файлы проекта
 COPY ./task_service/. .
 
-RUN npx prisma generate
-
 # Команда запуска
-CMD ["sh", "-c", "npx prisma migrate deploy && npm run start:dev"]
+CMD ["sh", "-c", " npm run start:dev"]

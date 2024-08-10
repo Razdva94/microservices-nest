@@ -1,10 +1,11 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
-import { PrismaService } from '@task-project/common';
+import { PrismaService } from 'task-project-razdva1994';
 import { CreateTaskFieldDto } from './dto/create-task-filed.dto';
 import { UpdateTaskFieldDto } from './dto/update-task-field.dto';
 import { FieldType, TaskFieldEnumOptions } from '@prisma/client';
-import { RequestWithUserId } from 'src/types/types';
+import { RequestWithUserId } from 'task-project-razdva1994';
 import { Action } from 'src/enums/enums';
+import { RabbitService } from 'src/rabbit/rabbit.service';
 
 interface IFindOrCreateExtra {
   skipCreation?: boolean;
@@ -30,7 +31,10 @@ enum TaskFieldName {
 
 @Injectable()
 export class TaskFieldsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private rabbitService: RabbitService,
+  ) {}
 
   async updateTaskField(
     taskFieldDto: UpdateTaskFieldDto,
@@ -39,7 +43,8 @@ export class TaskFieldsService {
     taskId: number,
     taskFieldId: number,
   ) {
-    const userId = req?.user?.id;
+    const userInfo: { id: number } = await this.rabbitService.sendToken(req);
+    const userId: number = userInfo?.id;
     await this.validateUserProject(userId, projectId, Action.Редактировать);
     const taskField = await this.prisma.taskField.findFirst({
       where: {
@@ -101,7 +106,8 @@ export class TaskFieldsService {
     projectId: number,
     taskId: number,
   ) {
-    const userId = req?.user?.id;
+    const userInfo: { id: number } = await this.rabbitService.sendToken(req);
+    const userId: number = userInfo?.id;
     await this.validateUserProject(userId, projectId, Action.Создать);
 
     const { value } = taskFieldDto;
@@ -126,7 +132,8 @@ export class TaskFieldsService {
     projectId: number,
     taskFieldId: number,
   ) {
-    const userId = req?.user?.id;
+    const userInfo: { id: number } = await this.rabbitService.sendToken(req);
+    const userId: number = userInfo?.id;
     await this.validateUserProject(userId, projectId, Action.Удалить);
     return await this.prisma.taskField.delete({
       where: {

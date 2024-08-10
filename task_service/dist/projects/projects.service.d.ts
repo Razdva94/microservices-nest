@@ -1,11 +1,12 @@
-import { RequestWithUserId } from 'src/types/types';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
-import { PrismaService } from '@task-project/common';
+import { PrismaService, RequestWithUserId } from 'task-project-razdva1994';
 import { Projects } from '@prisma/client';
+import { RabbitService } from 'src/rabbit/rabbit.service';
 export declare class ProjectsService {
     private prisma;
-    constructor(prisma: PrismaService);
+    private rabbitService;
+    constructor(prisma: PrismaService, rabbitService: RabbitService);
     getProjects(req: RequestWithUserId): Promise<{
         names: string[];
         projectEntities: {

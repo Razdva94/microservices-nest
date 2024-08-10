@@ -14,9 +14,8 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ColumnsController = void 0;
 const common_1 = require("@nestjs/common");
-const common_2 = require("@task-project/common");
+const task_project_razdva1994_1 = require("task-project-razdva1994");
 const columns_service_1 = require("./columns.service");
-const jwt_auth_guard_1 = require("../auth/jwt-auth.guard");
 const create_column_dto_1 = require("./dto/create-column.dto");
 const update_column_dto_1 = require("./dto/update-column.dto");
 const swagger_1 = require("@nestjs/swagger");
@@ -92,8 +91,7 @@ __decorate([
     }),
     (0, swagger_1.ApiQuery)({ name: 'projectId', description: 'Идентификатор проекта' }),
     (0, common_1.Post)('/create'),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.UsePipes)(common_2.ValidationPipe),
+    (0, common_1.UsePipes)(task_project_razdva1994_1.ValidationPipe),
     __param(0, (0, common_1.Body)()),
     __param(1, (0, common_1.Req)()),
     __param(2, (0, common_1.Next)()),
@@ -111,8 +109,7 @@ __decorate([
     }),
     (0, swagger_1.ApiQuery)({ name: 'projectId', description: 'Идентификатор проекта' }),
     (0, common_1.Patch)('/update/:id'),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.UsePipes)(common_2.ValidationPipe),
+    (0, common_1.UsePipes)(task_project_razdva1994_1.ValidationPipe),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __param(2, (0, common_1.Req)()),
@@ -131,8 +128,7 @@ __decorate([
     }),
     (0, swagger_1.ApiQuery)({ name: 'projectId', description: 'Идентификатор проекта' }),
     (0, common_1.Delete)('/delete/:id'),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.UsePipes)(common_2.ValidationPipe),
+    (0, common_1.UsePipes)(task_project_razdva1994_1.ValidationPipe),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Req)()),
     __param(2, (0, common_1.Res)()),
@@ -152,8 +148,7 @@ __decorate([
     }),
     (0, swagger_1.ApiQuery)({ name: 'projectId', description: 'Идентификатор проекта' }),
     (0, common_1.Patch)('/move/:id'),
-    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard),
-    (0, common_1.UsePipes)(common_2.ValidationPipe),
+    (0, common_1.UsePipes)(task_project_razdva1994_1.ValidationPipe),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Req)()),
     __param(2, (0, common_1.Res)()),
