@@ -18,7 +18,7 @@ const swagger_1 = require("@nestjs/swagger");
 const common_2 = require("@nestjs/common");
 const create_user_dto_1 = require("../users/dto/create-user.dto");
 const auth_service_1 = require("./auth.service");
-const common_3 = require("@task-project/common");
+const task_project_razdva1994_1 = require("task-project-razdva1994");
 const login_user_dto_1 = require("./dto/login-user.dto");
 let AuthController = class AuthController {
     constructor(authService) {
@@ -68,7 +68,7 @@ __decorate([
         description: 'Возврат токенов(access и refresh)',
     }),
     (0, common_2.Post)('/login'),
-    (0, common_2.UsePipes)(common_3.ValidationPipe),
+    (0, common_2.UsePipes)(task_project_razdva1994_1.ValidationPipe),
     __param(0, (0, common_2.Body)()),
     __param(1, (0, common_1.Res)()),
     __param(2, (0, common_1.Next)()),
@@ -82,7 +82,7 @@ __decorate([
         description: 'Возврат нового пользователя',
     }),
     (0, common_2.Post)('/registration'),
-    (0, common_2.UsePipes)(common_3.ValidationPipe),
+    (0, common_2.UsePipes)(task_project_razdva1994_1.ValidationPipe),
     __param(0, (0, common_2.Body)()),
     __param(1, (0, common_1.Res)()),
     __param(2, (0, common_1.Next)()),

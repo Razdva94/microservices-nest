@@ -11,8 +11,8 @@ import {
   UsePipes,
 } from '@nestjs/common';
 import { TaskFieldsService } from './task-fields.service';
-import { ValidationPipe } from '@task-project/common';
-import { RequestWithUserId, CustomError } from '@task-project/common';
+import { ValidationPipe } from 'task-project-razdva1994';
+import { RequestWithUserId, CustomError } from 'task-project-razdva1994';
 import { NextFunction, Response } from 'express';
 import { CreateTaskFieldDto } from './dto/create-task-filed.dto';
 import {

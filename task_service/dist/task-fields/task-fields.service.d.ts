@@ -1,8 +1,8 @@
-import { PrismaService } from '@task-project/common';
+import { PrismaService } from 'task-project-razdva1994';
 import { CreateTaskFieldDto } from './dto/create-task-filed.dto';
 import { UpdateTaskFieldDto } from './dto/update-task-field.dto';
 import { TaskFieldEnumOptions } from '@prisma/client';
-import { RequestWithUserId } from '@task-project/common';
+import { RequestWithUserId } from 'task-project-razdva1994';
 import { RabbitService } from 'src/rabbit/rabbit.service';
 interface ITaskFieldValue {
     taskId: number;
@@ -17,7 +17,7 @@ export declare class TaskFieldsService {
         updatedTaskField: {
             id: number;
             name: string;
-            type: import("@prisma/client").$Enums.FieldType;
+            type: import(".prisma/client").$Enums.FieldType;
         };
         taskFieldValue: ITaskFieldValue;
     }>;
@@ -25,7 +25,7 @@ export declare class TaskFieldsService {
     deleteTaskField(req: RequestWithUserId, projectId: number, taskFieldId: number): Promise<{
         id: number;
         name: string;
-        type: import("@prisma/client").$Enums.FieldType;
+        type: import(".prisma/client").$Enums.FieldType;
     }>;
     private determineFieldType;
     private findOrCreateTaskField;

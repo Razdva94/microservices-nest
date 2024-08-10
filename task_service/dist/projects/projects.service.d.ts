@@ -1,6 +1,6 @@
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
-import { PrismaService, RequestWithUserId } from '@task-project/common';
+import { PrismaService, RequestWithUserId } from 'task-project-razdva1994';
 import { Projects } from '@prisma/client';
 import { RabbitService } from 'src/rabbit/rabbit.service';
 export declare class ProjectsService {

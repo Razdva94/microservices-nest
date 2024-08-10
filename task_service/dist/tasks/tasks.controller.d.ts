@@ -2,7 +2,7 @@ import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from 'src/tasks/dto/update-task.dto';
 import { NextFunction, Response } from 'express';
-import { RequestWithUserId } from '@task-project/common';
+import { RequestWithUserId } from 'task-project-razdva1994';
 export declare class TasksController {
     private tasksService;
     constructor(tasksService: TasksService);

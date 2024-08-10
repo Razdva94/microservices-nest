@@ -1,6 +1,6 @@
 import { CreateColumnDto } from './dto/create-column.dto';
 import { UpdateColumnDto } from './dto/update-column.dto';
-import { PrismaService, RequestWithUserId } from '@task-project/common';
+import { PrismaService, RequestWithUserId } from 'task-project-razdva1994';
 import { RabbitService } from 'src/rabbit/rabbit.service';
 declare class ColumnsService {
     private prisma;

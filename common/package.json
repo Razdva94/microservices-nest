@@ -1,13 +1,13 @@
 {
   "name": "task-project-razdva1994",
-  "version": "0.0.23",
+  "version": "0.0.31",
   "description": "",
   "author": "Antonov Danila",
   "license": "UNLICENSED",
   "main": "dist/src/index.js",
   "scripts": {
     "create-view": "node dist/prisma/createView.js",
-    "build": "nest build && npm run copy-files && npx prisma generate",
+    "build": "nest build &&  npx prisma generate && npm run copy-files",
     "copy-files": "ts-node copy-files.ts",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "cross-env NODE_ENV=production nest start",
@@ -20,7 +20,8 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "migrate": "prisma migrate dev"
+    "migrate": "prisma migrate dev",
+    "postinstall": "prisma generate --schema=./dist/prisma/schema.prisma"
   },
   "dependencies": {
     "@fastify/cookie": "^9.2.0",

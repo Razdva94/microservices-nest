@@ -22,7 +22,6 @@ let AppController = class AppController {
     }
     async handleEvent(data) {
         const user = await this.rabbitService.handleEvent(data);
-        console.log(user);
         return user;
     }
 };

@@ -12,8 +12,8 @@ import {
   UsePipes,
 } from '@nestjs/common';
 import { NextFunction } from 'express';
-import { ValidationPipe } from '@task-project/common';
-import { RequestWithUserId, CustomError } from '@task-project/common';
+import { ValidationPipe } from 'task-project-razdva1994';
+import { RequestWithUserId, CustomError } from 'task-project-razdva1994';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { Response } from 'express';
 import { ProjectsService } from './projects.service';

@@ -1,5 +1,5 @@
 import { TaskFieldsService } from './task-fields.service';
-import { RequestWithUserId } from '@task-project/common';
+import { RequestWithUserId } from 'task-project-razdva1994';
 import { NextFunction, Response } from 'express';
 import { CreateTaskFieldDto } from './dto/create-task-filed.dto';
 export declare class TaskFieldsController {

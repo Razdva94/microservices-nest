@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import * as cookieParser from 'cookie-parser';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import { AllExceptionsFilter } from '@task-project/common';
+import { AllExceptionsFilter } from 'task-project-razdva1994';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 async function start() {
@@ -13,7 +13,7 @@ async function start() {
     {
       transport: Transport.RMQ,
       options: {
-        urls: ['amqp://localhost:5672'],
+        urls: [`amqp://${process.env.RABBIT_SERVICE_DOCKER}`],
         queue: 'auth_service_queue',
         queueOptions: {
           durable: true,

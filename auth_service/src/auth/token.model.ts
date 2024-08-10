@@ -1,7 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Prisma } from '@prisma/client';
-export class RefreshToken implements Prisma.RefreshTokensCreateInput {
-  user: Prisma.UsersCreateNestedOneWithoutRefreshTokenInput;
+export class RefreshToken {
   userId: number;
   id: number;
   @ApiProperty({

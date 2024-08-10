@@ -20,7 +20,7 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true
     // "paths": {
-    //   "@task-project/common/*": ["../common/src/*"]
+    //   "task-project-razdva1994/*": ["../common/src/*"]
     // }
   },
   // "include": ["/**/*.ts"],

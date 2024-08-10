@@ -1,7 +1,7 @@
 import { AuthService } from './auth/auth.service';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { PrismaService } from '@task-project/common';
+import { PrismaService } from 'task-project-razdva1994';
 import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
 import { UsersController } from './users/users.controller';

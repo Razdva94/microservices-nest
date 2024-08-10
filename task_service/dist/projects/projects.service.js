@@ -11,7 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProjectsService = void 0;
 const common_1 = require("@nestjs/common");
-const common_2 = require("@task-project/common");
+const task_project_razdva1994_1 = require("task-project-razdva1994");
 const rabbit_service_1 = require("../rabbit/rabbit.service");
 var TaskFieldValueType;
 (function (TaskFieldValueType) {
@@ -162,7 +162,7 @@ let ProjectsService = class ProjectsService {
 exports.ProjectsService = ProjectsService;
 exports.ProjectsService = ProjectsService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [common_2.PrismaService,
+    __metadata("design:paramtypes", [task_project_razdva1994_1.PrismaService,
         rabbit_service_1.RabbitService])
 ], ProjectsService);
 //# sourceMappingURL=projects.service.js.map

@@ -14,7 +14,7 @@ import {
   ValidationPipe,
   RequestWithUserId,
   CustomError,
-} from '@task-project/common';
+} from 'task-project-razdva1994';
 import { ColumnsService } from './columns.service';
 import { CreateColumnDto } from './dto/create-column.dto';
 import { NextFunction } from 'express';

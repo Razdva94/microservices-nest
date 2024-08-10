@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ColumnsController } from './columns.controller';
 import { ColumnsService } from './columns.service';
-import { PrismaService } from '@task-project/common';
+import { PrismaService } from 'task-project-razdva1994';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { RabbitService } from 'src/rabbit/rabbit.service';
 
@@ -13,7 +13,7 @@ import { RabbitService } from 'src/rabbit/rabbit.service';
         name: 'USER_INFO_TRANSPORT',
         transport: Transport.RMQ,
         options: {
-          urls: ['amqp://localhost:5672'],
+          urls: [`amqp://${process.env.RABBIT_SERVICE_DOCKER}`],
           queue: 'auth_service_queue',
           queueOptions: { durable: true },
         },

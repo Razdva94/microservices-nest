@@ -10,7 +10,7 @@ exports.AppModule = void 0;
 const auth_service_1 = require("./auth/auth.service");
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
-const common_2 = require("@task-project/common");
+const task_project_razdva1994_1 = require("task-project-razdva1994");
 const auth_controller_1 = require("./auth/auth.controller");
 const auth_module_1 = require("./auth/auth.module");
 const users_controller_1 = require("./users/users.controller");
@@ -23,7 +23,7 @@ exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         controllers: [auth_controller_1.AuthController, users_controller_1.UsersController, rabbit_controller_1.AppController],
-        providers: [common_2.PrismaService, auth_service_1.AuthService, rabbit_service_1.RabbitService],
+        providers: [task_project_razdva1994_1.PrismaService, auth_service_1.AuthService, rabbit_service_1.RabbitService],
         imports: [
             config_1.ConfigModule.forRoot({
                 envFilePath: `.env`,

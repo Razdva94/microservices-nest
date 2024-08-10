@@ -1,7 +1,7 @@
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
-import { PrismaService } from '@task-project/common';
-import { RequestWithUserId } from '@task-project/common';
+import { PrismaService } from 'task-project-razdva1994';
+import { RequestWithUserId } from 'task-project-razdva1994';
 import { RabbitService } from 'src/rabbit/rabbit.service';
 declare class TasksService {
     private prisma;

@@ -14,8 +14,8 @@ import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from 'src/tasks/dto/update-task.dto';
 import { NextFunction, Response } from 'express';
-import { ValidationPipe } from '@task-project/common';
-import { CustomError, RequestWithUserId } from '@task-project/common';
+import { ValidationPipe } from 'task-project-razdva1994';
+import { CustomError, RequestWithUserId } from 'task-project-razdva1994';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,

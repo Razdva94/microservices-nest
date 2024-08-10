@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { RequestWithUserId } from '@task-project/common/src';
+import { RequestWithUserId } from 'task-project-razdva1994';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()

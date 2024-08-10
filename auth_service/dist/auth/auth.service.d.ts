@@ -1,7 +1,7 @@
 import { JwtService } from '@nestjs/jwt';
 import { UsersService } from '../users/users.service';
 import { CreateUserDto } from '../users/dto/create-user.dto';
-import { PrismaService } from '@task-project/common';
+import { PrismaService } from 'task-project-razdva1994';
 import { LoginUserDto } from 'src/auth/dto/login-user.dto';
 import { Response } from 'express';
 import { RefreshToken } from './token.model';

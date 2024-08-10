@@ -19,7 +19,7 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "@task-project/common/*": ["../common/dist/*"] // без него не работало
+      "task-project-razdva1994/*": ["../common/dist/*"] // без него не работало
     }
   },
   "include": ["src/**/*"],

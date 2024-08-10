@@ -1,5 +1,4 @@
-import { Prisma } from '@prisma/client';
-declare class User implements Prisma.UsersCreateInput {
+declare class User {
     id: number;
     name: string;
     email: string;
