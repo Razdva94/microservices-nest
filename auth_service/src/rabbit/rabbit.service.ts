@@ -29,7 +29,6 @@ export class RabbitService {
         fakeContext as unknown as ExecutionContext,
       );
       if (canActivate) {
-        // Используйте данные пользователя для дальнейшей обработки
         const user = fakeRequest.user;
         return user;
       } else {
