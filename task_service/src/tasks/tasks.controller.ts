@@ -8,16 +8,14 @@ import {
   Post,
   Req,
   Res,
-  UseGuards,
   UsePipes,
 } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { CreateTaskDto } from './dto/create-task.dto';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { UpdateTaskDto } from 'src/tasks/dto/update-task.dto';
 import { NextFunction, Response } from 'express';
-import { ValidationPipe } from '../pipes/validation.pipe';
-import { CustomError, RequestWithUserId } from 'src/types/types';
+import { ValidationPipe } from 'task-project-razdva1994';
+import { CustomError, RequestWithUserId } from 'task-project-razdva1994';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -39,7 +37,6 @@ export class TasksController {
   })
   @ApiQuery({ name: 'projectId', description: 'Идентификатор проекта' })
   @Post('/create')
-  @UseGuards(JwtAuthGuard)
   @UsePipes(ValidationPipe)
   async createTask(
     @Body() taskDto: CreateTaskDto,
@@ -74,7 +71,6 @@ export class TasksController {
   })
   @ApiQuery({ name: 'projectId', description: 'Идентификатор проекта' })
   @Patch('/update/:id')
-  @UseGuards(JwtAuthGuard)
   @UsePipes(ValidationPipe)
   async updateTask(
     @Param('id') id: string,
@@ -111,7 +107,6 @@ export class TasksController {
   })
   @ApiQuery({ name: 'projectId', description: 'Идентификатор проекта' })
   @Patch('/move-within/:id')
-  @UseGuards(JwtAuthGuard)
   @UsePipes(ValidationPipe)
   async moveTaskWithinColumn(
     @Param('id') id: string,
@@ -152,7 +147,6 @@ export class TasksController {
   })
   @ApiQuery({ name: 'projectId', description: 'Идентификатор проекта' })
   @Patch('/move-outer/:id')
-  @UseGuards(JwtAuthGuard)
   @UsePipes(ValidationPipe)
   async moveTaskToOtherColumn(
     @Param('id') id: string,
@@ -192,7 +186,6 @@ export class TasksController {
   })
   @ApiQuery({ name: 'projectId', description: 'Идентификатор проекта' })
   @Delete('/delete/:id')
-  @UseGuards(JwtAuthGuard)
   async deleteTask(
     @Param('id') id: string,
     @Req() req: RequestWithUserId,

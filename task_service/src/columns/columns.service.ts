@@ -1,12 +1,16 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateColumnDto } from './dto/create-column.dto';
-import { RequestWithUserId } from 'src/types/types';
 import { UpdateColumnDto } from './dto/update-column.dto';
-import { PrismaService } from 'src/prisma.service';
+import { PrismaService, RequestWithUserId } from 'task-project-razdva1994';
 import { Action } from 'src/enums/enums';
+import { RabbitService } from 'src/rabbit/rabbit.service';
 
 @Injectable()
 class ColumnsService {
+  constructor(
+    private prisma: PrismaService,
+    private rabbitService: RabbitService,
+  ) {}
   async moveColumn(
     id: number,
     oldPosition: number,
@@ -14,7 +18,8 @@ class ColumnsService {
     projectId: number,
     req: RequestWithUserId,
   ) {
-    const userId: number = req?.user?.id;
+    const userInfo: { id: number } = await this.rabbitService.sendToken(req);
+    const userId: number = userInfo?.id;
     await this.validateUserProject(userId, projectId, Action.Переместить);
     const column = await this.prisma.columns.findFirst({
       where: {
@@ -72,13 +77,13 @@ class ColumnsService {
     });
     return `Задача ${newColumn.name} перемещена c ${oldPosition} на ${newPosition} позицию`;
   }
-  constructor(private prisma: PrismaService) {}
   async createColumn(
     dto: CreateColumnDto,
     req: RequestWithUserId,
     projectId: number,
   ) {
-    const userId: number = req?.user?.id;
+    const userInfo: { id: number } = await this.rabbitService.sendToken(req);
+    const userId: number = userInfo?.id;
     await this.validateUserProject(userId, projectId, Action.Создать);
 
     //находим позицию
@@ -109,7 +114,8 @@ class ColumnsService {
     req: RequestWithUserId,
     projectId: number,
   ) {
-    const userId: number = req?.user?.id;
+    const userInfo: { id: number } = await this.rabbitService.sendToken(req);
+    const userId: number = userInfo?.id;
     await this.validateUserProject(userId, projectId, Action.Редактировать);
 
     const column = await this.prisma.columns.update({
@@ -123,7 +129,8 @@ class ColumnsService {
   }
 
   async deleteColumn(id: string, req: RequestWithUserId, projectId: number) {
-    const userId: number = req?.user?.id;
+    const userInfo: { id: number } = await this.rabbitService.sendToken(req);
+    const userId: number = userInfo?.id;
     await this.validateUserProject(userId, projectId, Action.Удалить);
 
     // Находим удаляемую колонку, чтобы определить ее проект

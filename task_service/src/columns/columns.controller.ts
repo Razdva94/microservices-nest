@@ -8,17 +8,17 @@ import {
   Post,
   Req,
   Res,
-  UseGuards,
   UsePipes,
-  ValidationPipe,
 } from '@nestjs/common';
+import {
+  ValidationPipe,
+  RequestWithUserId,
+  CustomError,
+} from 'task-project-razdva1994';
 import { ColumnsService } from './columns.service';
-import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
 import { CreateColumnDto } from './dto/create-column.dto';
-import { RequestWithUserId } from 'src/types/types';
 import { NextFunction } from 'express';
 import { Response } from 'express';
-import { CustomError } from 'src/types/types';
 import { UpdateColumnDto } from './dto/update-column.dto';
 import {
   ApiBearerAuth,
@@ -41,7 +41,6 @@ class ColumnsController {
   })
   @ApiQuery({ name: 'projectId', description: 'Идентификатор проекта' })
   @Post('/create')
-  @UseGuards(JwtAuthGuard)
   @UsePipes(ValidationPipe)
   async createColumn(
     @Body() columnDto: CreateColumnDto,
@@ -74,7 +73,6 @@ class ColumnsController {
   })
   @ApiQuery({ name: 'projectId', description: 'Идентификатор проекта' })
   @Patch('/update/:id')
-  @UseGuards(JwtAuthGuard)
   @UsePipes(ValidationPipe)
   async updateColumn(
     @Param('id') id: string,
@@ -109,7 +107,6 @@ class ColumnsController {
   })
   @ApiQuery({ name: 'projectId', description: 'Идентификатор проекта' })
   @Delete('/delete/:id')
-  @UseGuards(JwtAuthGuard)
   @UsePipes(ValidationPipe)
   async deleteColumn(
     @Param('id') id: string,
@@ -144,7 +141,6 @@ class ColumnsController {
   })
   @ApiQuery({ name: 'projectId', description: 'Идентификатор проекта' })
   @Patch('/move/:id')
-  @UseGuards(JwtAuthGuard)
   @UsePipes(ValidationPipe)
   async moveColumn(
     @Param('id') id: string,

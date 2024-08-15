@@ -1,13 +1,17 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { UpdateTaskDto } from './dto/update-task.dto';
-import { PrismaService } from 'src/prisma.service';
-import { RequestWithUserId } from 'src/types/types';
+import { PrismaService } from 'task-project-razdva1994';
+import { RequestWithUserId } from 'task-project-razdva1994';
 import { Action } from 'src/enums/enums';
+import { RabbitService } from 'src/rabbit/rabbit.service';
 
 @Injectable()
 class TasksService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private rabbitService: RabbitService,
+  ) {}
   async moveTaskToOtherColumn(
     id: number,
     oldPosition: number,
@@ -16,7 +20,8 @@ class TasksService {
     newColumnId: number,
     req: RequestWithUserId,
   ) {
-    const userId: number = req?.user?.id;
+    const userInfo: { id: number } = await this.rabbitService.sendToken(req);
+    const userId: number = userInfo?.id;
 
     // Вызов вспомогательного метода для проверки
     await this.validateUserProject(userId, projectId, Action.Переместить);
@@ -97,7 +102,8 @@ class TasksService {
     projectId: number,
     req: RequestWithUserId,
   ) {
-    const userId: number = req?.user?.id;
+    const userInfo: { id: number } = await this.rabbitService.sendToken(req);
+    const userId: number = userInfo?.id;
     await this.validateUserProject(userId, projectId, Action.Переместить);
     const task = await this.prisma.tasks.findFirst({
       where: {
@@ -172,7 +178,8 @@ class TasksService {
     req: RequestWithUserId,
     projectId: number,
   ) {
-    const userId: number = req?.user?.id;
+    const userInfo: { id: number } = await this.rabbitService.sendToken(req);
+    const userId: number = userInfo?.id;
     await this.validateUserProject(userId, projectId, Action.Создать);
     const column = await this.prisma.columns.findFirst({
       where: {
@@ -216,7 +223,8 @@ class TasksService {
     req: RequestWithUserId,
     projectId: number,
   ) {
-    const userId: number = req?.user?.id;
+    const userInfo: { id: number } = await this.rabbitService.sendToken(req);
+    const userId: number = userInfo?.id;
     await this.validateUserProject(userId, projectId, Action.Редактировать);
 
     const task = await this.prisma.tasks.update({
@@ -229,7 +237,8 @@ class TasksService {
     return task;
   }
   async deleteTask(id: number, req: RequestWithUserId, projectId: number) {
-    const userId: number = req?.user?.id;
+    const userInfo: { id: number } = await this.rabbitService.sendToken(req);
+    const userId: number = userInfo?.id;
     await this.validateUserProject(userId, projectId, Action.Удалить);
 
     // Находим удаляемую задачу, чтобы определить ее колонку
