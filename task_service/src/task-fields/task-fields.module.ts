@@ -13,7 +13,7 @@ import { RabbitService } from 'src/rabbit/rabbit.service';
         name: 'USER_INFO_TRANSPORT',
         transport: Transport.RMQ,
         options: {
-          urls: [`amqp://${process.env.RABBIT_SERVICE_DOCKER}`],
+          urls: [`${process.env.RABBIT_SERVICE_DOCKER}`],
           queue: 'auth_service_queue',
           queueOptions: { durable: true },
         },

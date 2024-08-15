@@ -14,7 +14,7 @@ async function start() {
     {
       transport: Transport.RMQ,
       options: {
-        urls: [`amqp://${process.env.RABBIT_SERVICE_DOCKER}`],
+        urls: [`${process.env.RABBIT_SERVICE_DOCKER}`],
         queue: 'task_service_queue',
         queueOptions: {
           durable: true,
