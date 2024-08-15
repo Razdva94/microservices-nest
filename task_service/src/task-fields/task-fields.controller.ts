@@ -117,7 +117,6 @@ export class TaskFieldsController {
   ) {
     const projectId = req.query.projectId;
     try {
-      console.log(Number(projectId), Number(taskFieldId));
       const taskField = await this.taskFieldsService.deleteTaskField(
         req,
         Number(projectId),

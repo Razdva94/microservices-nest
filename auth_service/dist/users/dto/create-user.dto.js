@@ -22,6 +22,7 @@ __decorate([
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "name", void 0);
 __decorate([
+    (0, class_validator_1.IsEmail)({}, { message: 'Некорректная почта' }),
     (0, swagger_1.ApiProperty)({ example: 'razdva@mail.ru', description: 'Почта' }),
     (0, class_validator_1.IsString)({ message: 'Имя должно быть строкой' }),
     (0, class_validator_1.IsString)({ message: 'Почта должна быть строкой' }),
@@ -29,7 +30,6 @@ __decorate([
     __metadata("design:type", String)
 ], CreateUserDto.prototype, "email", void 0);
 __decorate([
-    (0, class_validator_1.IsEmail)({}, { message: 'Некорректная почта' }),
     (0, swagger_1.ApiProperty)({ example: 'strongpassword', description: 'Пароль' }),
     (0, class_validator_1.IsString)({ message: 'Пароль должен быть строкой' }),
     (0, class_validator_1.IsNotEmpty)({ message: 'Поле имя должно быть заполнено' }),

@@ -10,10 +10,14 @@ export class RabbitService {
   ) {}
 
   async sendToken(req: RequestWithUserId) {
-    const authHeader = req.headers?.authorization;
-    const token = authHeader.split(' ')[1];
-    const observable = this.client.send('send_token', token);
-    const user = await firstValueFrom(observable);
-    return user;
+    try {
+      const authHeader = req.headers?.authorization;
+      const token = authHeader.split(' ')[1];
+      const observable = this.client.send('send_token', token);
+      const user = await firstValueFrom(observable);
+      return user;
+    } catch (e) {
+      console.log(e);
+    }
   }
 }

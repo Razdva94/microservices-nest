@@ -53,7 +53,6 @@ let TaskFieldsController = class TaskFieldsController {
     async deleteTaskField(next, res, req, taskId, taskFieldId) {
         const projectId = req.query.projectId;
         try {
-            console.log(Number(projectId), Number(taskFieldId));
             const taskField = await this.taskFieldsService.deleteTaskField(req, Number(projectId), Number(taskFieldId));
             res.send(taskField);
         }

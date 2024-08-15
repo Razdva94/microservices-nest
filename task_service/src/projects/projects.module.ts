@@ -5,15 +5,19 @@ import { PrismaService } from 'task-project-razdva1994';
 import { RabbitService } from 'src/rabbit/rabbit.service';
 import { ClientsModule } from '@nestjs/microservices/module/clients.module';
 import { Transport } from '@nestjs/microservices';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: `.env`,
+    }),
     ClientsModule.register([
       {
         name: 'USER_INFO_TRANSPORT',
         transport: Transport.RMQ,
         options: {
-          urls: [`amqp://${process.env.RABBIT_SERVICE_DOCKER}`],
+          urls: [`${process.env.RABBIT_SERVICE_DOCKER}`],
           queue: 'auth_service_queue',
           queueOptions: { durable: true },
         },
